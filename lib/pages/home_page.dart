@@ -19,7 +19,12 @@ class HomePage extends StatelessWidget {
         elevation: 0,
         title: const Text('Historial'),
         actions: [
-          IconButton(icon: const Icon(Icons.delete_forever), onPressed: () {})
+          IconButton(
+              icon: const Icon(Icons.delete_forever),
+              onPressed: () {
+                Provider.of<ScanListProvider>(context, listen: false)
+                    .borrarTodos();
+              })
         ],
       ),
       body: const _HomePageBody(),
@@ -41,7 +46,8 @@ class _HomePageBody extends StatelessWidget {
     // final tempScan = ScanModel(valor: 'http://google.com');
     // DBProvider.db.getScanById(7).then((scan) => print(scan?.valor));
     // DBProvider.db.deleteAllScan().then(print);
-    final scanListProvider = Provider.of<ScanListProvider>(context, listen: false);
+    final scanListProvider =
+        Provider.of<ScanListProvider>(context, listen: false);
     switch (currentIndex) {
       case 0:
         scanListProvider.cargarScanPorTipo('geo');
